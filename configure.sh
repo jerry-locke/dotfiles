@@ -123,6 +123,11 @@ echo ''
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
 	echo "Now installing az cli..."
+    # Install latest signing key to keep getting updates for apt users
+    which apt >/dev/null 2>&1; 
+    if [[ $? -eq 0 ]] 
+      curl -L https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
+    fi
     brew install azure-cli
     if [[ $? -eq 0 ]]
     then
